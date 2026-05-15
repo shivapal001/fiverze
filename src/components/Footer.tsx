@@ -6,10 +6,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
           <div className="md:col-span-2">
-            <span className="text-3xl font-display font-bold tracking-tighter text-white">
-              FIN<span className="text-brand">VERZE</span>
-            </span>
-            <p className="mt-8 text-slate-500 text-lg max-w-sm font-light leading-relaxed">
+            <div className="flex items-center space-x-3 mb-8">
+              <img src="/logo.svg" alt="" className="w-10 h-10 object-contain" />
+              <span className="text-3xl font-display font-bold tracking-tighter text-white">
+                FIN<span className="text-brand">VERZE</span>
+              </span>
+            </div>
+            <p className="text-slate-500 text-lg max-w-sm font-light leading-relaxed">
               Empowering the next generation of campuses with professional financial discipline and structured behavioral programs.
             </p>
           </div>

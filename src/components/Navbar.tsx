@@ -18,8 +18,15 @@ export default function Navbar() {
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center space-x-2"
+          className="flex items-center space-x-3"
         >
+          <div className="w-8 h-8 relative">
+            <img 
+              src="/logo.svg" 
+              alt="VZ" 
+              className="w-full h-full object-contain" 
+            />
+          </div>
           <span className="text-xl font-display font-bold tracking-tighter text-white">
             FIN<span className="text-brand">VERZE</span>
           </span>
