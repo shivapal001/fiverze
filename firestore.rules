@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function isSignedIn() { return request.auth != null; }
+    function incoming() { return request.resource.data; }
+
+    function isValidLead(data) {
+      return data.keys().hasAll(['collegeName', 'contactPerson', 'email', 'phone', 'programInterestedIn', 'createdAt'])
+        && data.keys().size() == 6
+        && data.collegeName is string && data.collegeName.size() <= 200
+        && data.contactPerson is string && data.contactPerson.size() <= 100
+        && data.email is string && data.email.size() <= 100 && data.email.matches('.+@.+\\..+')
+        && data.phone is string && data.phone.size() <= 20
+        && data.programInterestedIn is string && data.programInterestedIn.size() <= 200
+        && data.createdAt == request.time;
+    }
+
+    match /leads/{leadId} {
+      allow create: if isValidId(leadId) && isValidLead(incoming());
+      // Leads are only readable by authenticated admins if applicable, 
+      // but the PRD doesn't mention an admin panel yet.
+      // For now, we only allow creation from the public form.
+      allow get, list: if false; 
+    }
+  }
+}

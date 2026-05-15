@@ -1,0 +1,44 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "A lead generated from a college or campus interested in the program.",
+      "type": "object",
+      "properties": {
+        "collegeName": {
+          "type": "string",
+          "description": "The name of the college or campus."
+        },
+        "contactPerson": {
+          "type": "string",
+          "description": "The name of the person to contact."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The email address of the contact person."
+        },
+        "phone": {
+          "type": "string",
+          "description": "The phone number of the contact person."
+        },
+        "programInterestedIn": {
+          "type": "string",
+          "description": "The program the college is interested in."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the lead was created."
+        }
+      },
+      "required": ["collegeName", "contactPerson", "email", "phone", "programInterestedIn", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Collection of institution leads."
+    }
+  }
+}
